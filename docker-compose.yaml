@@ -1,0 +1,106 @@
+version: '3'
+services:
+  # --------------------------------------
+  # BASE SERVICES
+  # --------------------------------------
+  postgresql-database:
+    container_name: ${DATABASE_HOST}
+    image: postgis/postgis:13-master
+    volumes:
+      - ./app_data/database:/var/lib/postgresql/data
+    networks:
+      - strapi_elene_net
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    profiles: 
+      - production
+      - dev
+
+  redis-cache:
+    image: redis:6
+    networks:
+      - strapi_elene_net
+    profiles:
+      - production
+
+  # strapi-cms-base:
+  #   build: 
+  #     context: ./
+  #     dockerfile: strapi/Dockerfile
+  #     target: builder
+  #   ports:
+  #     - ${STRAPI_PORT}:1337
+  #   # volumes:
+  #     # - ./app_data/strapi:/app/
+  #   networks:
+  #     - strapi_elene_net
+  #   depends_on:
+  #     - postgresql-database
+  #   restart: unless-stopped
+  #   profiles:
+  #     - norun
+
+  strapi-cms-base:
+    build: 
+      context: ./
+      dockerfile: strapi_elene/Dockerfile
+      target: development
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - strapi_elene_net
+    depends_on:
+      - postgresql-database
+    restart: unless-stopped
+    profiles:
+      - norun
+    volumes:
+      # - ./app_data/strapi/config:/opt/app/config
+      - ./app_data/strapi/src:/app/src
+      - ./app_data/strapi/public/uploads:/app/public/uploads
+
+  # --------------------------------------
+  # DEVELOPEMENT SERVICES
+  # --------------------------------------
+
+  strapi-dev:
+    extends:
+      service: strapi-cms-base
+    profiles:
+      - dev
+
+  # --------------------------------------
+  # TEST SERVICES
+  # --------------------------------------
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - 8062:80
+    expose:
+      - 8062
+    profiles:
+      - norun
+    networks:
+      - strapi_elene_net
+
+  # --------------------------------------
+  # PRODUCTION SERVICES
+  # --------------------------------------
+  strapi-prod:
+    extends:
+      service: strapi-cms-base
+    build: 
+      target: production
+    # depends_on:
+    #   - redis-cache
+    profiles:
+      - production
+
+networks:
+  strapi_elene_net:
