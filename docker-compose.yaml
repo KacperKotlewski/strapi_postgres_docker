@@ -5,7 +5,7 @@ services:
   # --------------------------------------
   postgresql-database:
     container_name: ${DATABASE_HOST}
-    image: postgis/postgis:13-master
+    image: postgres:13-alpine
     volumes:
       - ./app_data/database:/var/lib/postgresql/data
     networks:
