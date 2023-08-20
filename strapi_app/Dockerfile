@@ -3,8 +3,8 @@ WORKDIR /app
 ARG NODE_ENV=development
 COPY strapi_app/package.json strapi_app/yarn.lock ./
 RUN yarn install
-COPY .env .
 COPY strapi_app/. .
+COPY .env .
 
 
 from builder as development
