@@ -9,7 +9,7 @@ services:
     volumes:
       - ./app_data/database:/var/lib/postgresql/data
     networks:
-      - strapi_elene_net
+      - strapi_net
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -18,39 +18,15 @@ services:
       - production
       - dev
 
-  redis-cache:
-    image: redis:6
-    networks:
-      - strapi_elene_net
-    profiles:
-      - production
-
-  # strapi-cms-base:
-  #   build: 
-  #     context: ./
-  #     dockerfile: strapi/Dockerfile
-  #     target: builder
-  #   ports:
-  #     - ${STRAPI_PORT}:1337
-  #   # volumes:
-  #     # - ./app_data/strapi:/app/
-  #   networks:
-  #     - strapi_elene_net
-  #   depends_on:
-  #     - postgresql-database
-  #   restart: unless-stopped
-  #   profiles:
-  #     - norun
-
   strapi-cms-base:
     build: 
       context: ./
-      dockerfile: strapi_elene/Dockerfile
+      dockerfile: strapi_app/Dockerfile
       target: development
     ports:
       - ${PORT}:${PORT}
     networks:
-      - strapi_elene_net
+      - strapi_net
     depends_on:
       - postgresql-database
     restart: unless-stopped
@@ -87,7 +63,7 @@ services:
     profiles:
       - norun
     networks:
-      - strapi_elene_net
+      - strapi_net
 
   # --------------------------------------
   # PRODUCTION SERVICES
@@ -103,4 +79,4 @@ services:
       - production
 
 networks:
-  strapi_elene_net:
+  strapi_net:
