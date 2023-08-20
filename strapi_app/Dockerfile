@@ -2,8 +2,8 @@ FROM node:16-alpine as builder
 WORKDIR /app
 ARG NODE_ENV=development
 COPY strapi_app/package.json strapi_app/yarn.lock ./
-COPY .env .
 RUN yarn install
+COPY .env .
 COPY strapi_app/. .
 
 
