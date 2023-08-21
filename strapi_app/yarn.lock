@@ -1269,6 +1269,18 @@
     lodash "4.17.21"
     sift "16.0.1"
 
+"@strapi/plugin-color-picker@^4.12.5":
+  version "4.12.5"
+  resolved "https://registry.npmjs.org/@strapi/plugin-color-picker/-/plugin-color-picker-4.12.5.tgz"
+  integrity sha512-rDIgrrCpu3cavfCbFGQWFCp+4YEdUXKzPoevWdYvxAy0e32m1sXw4WDFr/15gvaSHJ4T+wNQGLa/823WjQDN0g==
+  dependencies:
+    "@strapi/design-system" "1.9.0"
+    "@strapi/helper-plugin" "4.12.5"
+    "@strapi/icons" "1.9.0"
+    prop-types "^15.8.1"
+    react-colorful "5.6.1"
+    react-intl "6.4.1"
+
 "@strapi/plugin-content-manager@4.12.5":
   version "4.12.5"
   resolved "https://registry.npmjs.org/@strapi/plugin-content-manager/-/plugin-content-manager-4.12.5.tgz"
@@ -1415,7 +1427,7 @@
     "@strapi/utils" "4.12.5"
     fs-extra "10.0.0"
 
-"@strapi/strapi@^4.3.4", "@strapi/strapi@^4.9.0", "@strapi/strapi@4.12.5":
+"@strapi/strapi@^4.3.4", "@strapi/strapi@^4.4.0", "@strapi/strapi@^4.9.0", "@strapi/strapi@4.12.5":
   version "4.12.5"
   resolved "https://registry.npmjs.org/@strapi/strapi/-/strapi-4.12.5.tgz"
   integrity sha512-W5p45B3syIOJ78iyO5VcxjFYIn5Qz+L7Z0ka4yaecCH+sEygRM1WUvXDfOHrvTt/4XOCb2qCA5jKjnecrldwiw==
@@ -6980,6 +6992,11 @@ rc@^1.2.7, rc@^1.2.8, rc@1.2.8:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-colorful@5.6.1:
+  version "5.6.1"
+  resolved "https://registry.npmjs.org/react-colorful/-/react-colorful-5.6.1.tgz"
+  integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
 
 react-dnd-html5-backend@15.1.3:
   version "15.1.3"

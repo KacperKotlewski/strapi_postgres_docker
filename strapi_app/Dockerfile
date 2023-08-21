@@ -8,6 +8,7 @@ COPY .env .
 
 
 from builder as development
+RUN yarn build
 CMD ["yarn", "develop"]
 # CMD ["tail", "-f", "/dev/null"]
 
